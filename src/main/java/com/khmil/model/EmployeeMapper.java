@@ -1,9 +1,11 @@
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
+/*
+package com.khmil.model;
+
+import com.khmil.model.ObjectMapper;
+import com.khmil.model.Employee;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
 
 public class EmployeeMapper extends ObjectMapper<Employee> {
     @Override
@@ -11,3 +13,4 @@ public class EmployeeMapper extends ObjectMapper<Employee> {
         return super.mapRersultSetToObject(resultSet, clazz);
     }
 }
+*/

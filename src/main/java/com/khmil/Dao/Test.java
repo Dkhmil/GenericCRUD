@@ -1,6 +1,8 @@
+/*
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+package com.khmil.Dao;
+import com.khmil.annotations.TableName;
+
 import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,28 +10,27 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractDao<T, ID> extends ObjectMapper implements GenericDao<T, ID>  {
+public abstract class AbstractDao<T, ID> extends ObjectMapper implements GenericDao<T, ID> {
     protected final Connection connection;
     private Class<?> clazz;
     private Map<String, Object> fields = new LinkedHashMap<>();
     private Map<String, Object> types = new LinkedHashMap<>();
-    String tableName;
+    String tableName ;
     StringBuilder colomns = new StringBuilder();
     StringBuilder values = new StringBuilder();
     StringBuilder update = new StringBuilder();
-    ResultSet resultSet;
+
 
     protected AbstractDao(Connection connection) {
         this.connection = connection;
     }
 
-
     protected abstract Object getObjectFromResultSet(ResultSet resultSet) throws SQLException;
+
     public void dataMapper(T t) throws IllegalAccessException {
         clazz = t.getClass();
         tableName = clazz.getAnnotation(TableName.class).name();
         Field[] localFields = clazz.getDeclaredFields();
-
         for (Field field : localFields) {
             String colomn = field.getAnnotation(ColomnName.class).name();
             if (colomn != null) {
@@ -63,6 +64,8 @@ public abstract class AbstractDao<T, ID> extends ObjectMapper implements Generic
             update.append(entity.getValue() + "',");
         }
         update = update.deleteCharAt(update.length() - 1);
+      //  System.out.println(update);
+        System.out.println(colomns);
 
 
     }
@@ -84,15 +87,9 @@ public abstract class AbstractDao<T, ID> extends ObjectMapper implements Generic
             e.printStackTrace();
         }
     }
-
     @Override
-    public T read(T t, ID id) {
-        try {
-            dataMapper(t);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        String Sql = "SELECT " + colomns + " FROM " + tableName + " WHERE ID = " + "'" + id + "';";
+    public T read(ID id) {
+        String Sql = "SELECT * FROM EMPLOYEE WHERE ID = " + "'" + id + "';";
         ResultSet resultSet;
         Statement statement;
         Object instance = null;
@@ -100,7 +97,7 @@ public abstract class AbstractDao<T, ID> extends ObjectMapper implements Generic
             statement = connection.createStatement();
             resultSet = statement.executeQuery(Sql);
             while (resultSet.next()) {
-                instance = mapRersultSetToObject(resultSet,clazz);
+                instance = mapRersultSetToObject(resultSet, Employee.class);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -177,3 +174,4 @@ public abstract class AbstractDao<T, ID> extends ObjectMapper implements Generic
     }
 }
 
+*/

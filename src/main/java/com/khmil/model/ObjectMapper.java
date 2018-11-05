@@ -1,8 +1,13 @@
+/*
+package com.khmil.model;
+
+import com.khmil.Factory;
+import com.khmil.annotations.ColomnName;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.*;
-import javax.persistence.Column;
 
 public class ObjectMapper<T> {
 
@@ -79,3 +84,4 @@ public class ObjectMapper<T> {
 }
 
 
+*/

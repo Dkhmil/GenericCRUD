@@ -1,26 +1,27 @@
-import javax.persistence.Column;
-import javax.persistence.Entity;
+package com.khmil.model;
 
+import com.khmil.annotations.ColumnName;
+import com.khmil.annotations.TableName;
 
 @TableName(name = "EMPLOYEE")
 public class Employee {
 
-    @ColomnName(name = "ID")
+    @ColumnName(name = "ID")
     private static Long id;
 
-    @ColomnName(name = "FIRST_NAME")
+    @ColumnName(name = "FIRST_NAME")
     private String firstName;
 
-    @ColomnName(name = "MIDDLE_NAME")
+    @ColumnName(name = "MIDDLE_NAME")
     private static String middleName;
 
-    @ColomnName(name = "LAST_NAME")
+    @ColumnName(name = "LAST_NAME")
     private static String lastName;
 
-    @ColomnName(name = "TITLE")
+    @ColumnName(name = "TITLE")
     private static String title;
 
-    @ColomnName(name = "SALARY")
+    @ColumnName(name = "SALARY")
     private static String salary;
 
     public void setId(Long id) {
@@ -50,18 +51,23 @@ public class Employee {
     public Long getId() {
         return id;
     }
+
     public String getFirstName() {
         return firstName;
     }
+
     public String getMiddleName() {
         return middleName;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public String getTitle() {
         return title;
     }
+
     public String getSalary() {
         return salary;
     }
@@ -89,5 +95,4 @@ public class Employee {
                 ", salary=" + salary +
                 '}';
     }
-
 }
