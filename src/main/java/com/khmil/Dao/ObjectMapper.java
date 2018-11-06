@@ -1,9 +1,7 @@
-/*
-package com.khmil.model;
+package com.khmil.Dao;
 
 import com.khmil.Factory;
-import com.khmil.annotations.ColomnName;
-
+import com.khmil.annotations.ColumnName;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
@@ -11,18 +9,18 @@ import java.util.*;
 
 public class ObjectMapper<T> {
 
-    public T mapRersultSetToObject(ResultSet resultSet, Class clazz) throws SQLException {
+    public static T mapResultSetToObject(ResultSet resultSet, Class clazz) throws SQLException {
         Map<String, Object> fromRs = new LinkedHashMap<>();
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
         Map<String, Field> fields = new HashMap<>();
-        while (resultSet.next()) {
+        if (resultSet.next()) {
             for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
                 fromRs.put(resultSetMetaData.getColumnName(i), resultSet.getObject(i));
             }
         }
         List<Field> fieldList = Arrays.asList(clazz.getDeclaredFields());
         for (Field field : fieldList) {
-            ColomnName col = field.getAnnotation(ColomnName.class);
+            ColumnName col = field.getAnnotation(ColumnName.class);
             if (col != null) {
                 field.setAccessible(true);
                 fields.put(col.name(), field);
@@ -54,26 +52,6 @@ public class ObjectMapper<T> {
         return null;
     }
 
-
-    public List<T> findAll(Class clazz) throws SQLException {
-        Connection connection = Factory.connection;
-        List<T> list = new ArrayList<>();
-        String query = "SELECT * FROM EMPLOYEE where id = ?; ";
-        PreparedStatement statement = connection.prepareStatement(query);
-        ResultSet resultSet;
-
-        for (int i = 1; i <= 5; i++) {
-            statement.setObject(1,i + "");
-            resultSet = statement.executeQuery();
-            T t = mapRersultSetToObject(resultSet, clazz);
-            list.add(t);
-
-        }
-        System.out.println(list);
-        return list;
-
-
-    }
     private T convertInstanceOfObject(Object o) {
         try {
             return (T) o;
@@ -84,4 +62,3 @@ public class ObjectMapper<T> {
 }
 
 
-*/
