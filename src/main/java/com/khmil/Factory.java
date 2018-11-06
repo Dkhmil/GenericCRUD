@@ -22,13 +22,14 @@ public class Factory {
     }
 
     public static void main(String[] args) {
-        Employee employee = new Employee(1l,"Іван","Васильович","Петренко","інженер","17000");
-        EmployeeDaoImpl employeeDao = new EmployeeDaoImpl(connection,employee.getClass());
-        employeeDao.create(employee);
-        employeeDao.read(2l);
-        employeeDao.update(employee);
-        employeeDao.delete(1l);
-        employeeDao.readAll();
+        Employee employee = new Employee(7l, "Іван", "Gtnhjdbx", "Петренко", "інженер", "17000");
+        EmployeeDaoImpl employeeDao = new EmployeeDaoImpl(connection, employee.getClass());
+        //+  employeeDao.create(employee);
+        //+  employeeDao.read(1l);
+        //+  employeeDao.update(employee);
+        //+  employeeDao.delete(7l);
+        //? employeeDao.readAll(); - переписуэ даны в листі, розмір корректно відображає
+        // firstName поле не вноситься
     }
 }
 

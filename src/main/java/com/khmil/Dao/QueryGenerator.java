@@ -18,8 +18,8 @@ public class QueryGenerator {
             e.printStackTrace();
         }
         String read = "SELECT " + result[0] + " FROM " + result[2] + " WHERE ID = ?";
-        String create = "INSERT INTO " + result[2] + "(" + result[0] + ") VALUES(" + result[3] + ");";
-        String update = "UPDATE " + result[2] + " SET " + result[3] + " WHERE ID = ?";
+        String create = "INSERT INTO " + result[2] + "(" + result[0] + ") VALUES(" + result[1] + ");";
+        String update = "UPDATE " + result[2] + " SET " + result[3] + " WHERE ID =" + result[3].substring(5,result[3].indexOf(","));
         String delete = "DELETE FROM " + result[2] + " WHERE ID = ?";
         String findAll = "SELECT " + result[0] + " FROM " + result[2] + ";";
 
@@ -71,7 +71,7 @@ public class QueryGenerator {
         }
         columns = columns.deleteCharAt(columns.length() - 1);
         for (Object value : fields.values()) {
-            values.append("?");
+            values.append("'" + value + "'");
             if (values.length() >= 1) {
                 values.append(",");
             }
